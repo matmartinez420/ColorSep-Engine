@@ -102,18 +102,18 @@
 <body>
 
     <div class="top-bar">
-        <div class="logo">🟢 Jarcan ColorSep Engine <span style="font-size:11px; background:#3a3a44; color:var(--text-muted); padding:2px 6px; border-radius:4px;">V4.6 云端全连通流畅版</span></div>
-        <div style="font-size:12px; color:var(--text-muted)">安全状态：<span style="color:var(--success)">● 渲染解耦防假死已激活</span></div>
+        <div class="logo">🟢 Jarcan ColorSep Engine <span style="font-size:11px; background:#3a3a44; color:var(--text-muted); padding:2px 6px; border-radius:4px;">PRO</span></div>
+        <div style="font-size:12px; color:var(--text-muted)">状态：<span style="color:var(--success)">OK</span></div>
     </div>
 
     <div class="main-layout">
         <div class="panel left-col">
-            <div class="section-title">1. 印前文件导入</div>
+            <div class="section-title">文件导入</div>
             <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
                 <div class="drop-tips" id="dropTips">
                     <span style="font-size: 24px;">📥</span><br>
-                    <span style="font-weight:bold; color:var(--text)">点击或拖入原稿图片</span><br>
-                    <span style="font-size:11px; margin-top:4px; display:block;">支持剪贴板粘贴</span>
+                    <span style="font-weight:bold; color:var(--text)">点击或拖入图片</span><br>
+                    <span style="font-size:11px; margin-top:4px; display:block;">可直接粘贴</span>
                 </div>
                 <img id="inputPreview">
             </div>
@@ -121,20 +121,20 @@
             
             <div class="config-group">
                 <div class="config-label">
-                    <span>目标分色数 (KMeans)</span>
+                    <span>分色层数</span>
                     <span id="sliderVal" style="color:var(--primary); font-weight:bold;">8 色</span>
                 </div>
                 <input type="range" id="colorsCount" min="2" max="18" value="8" oninput="document.getElementById('sliderVal').innerText = this.value + ' 色'">
             </div>
 
             <div class="config-group">
-                <div class="config-label"><span>印前边缘网版羽化控制</span></div>
+                <div class="config-label"><span>边缘控制</span></div>
                 <div class="radio-group">
                     <input type="radio" id="edgeHard" name="edgeType" value="hard">
                     <label class="radio-label" for="edgeHard">硬边</label>
                     
                     <input type="radio" id="edgeSoft" name="edgeType" value="soft" checked>
-                    <label class="radio-label" for="edgeSoft">柔边 (1PX)</label>
+                    <label class="radio-label" for="edgeSoft">柔边</label>
                     
                     <input type="radio" id="edgeRepair" name="edgeType" value="repair">
                     <label class="radio-label" for="edgeRepair">修边</label>
@@ -144,7 +144,7 @@
             <div class="action-box">
                 <div class="btn-progress-container" id="startBtnContainer" onclick="executeSeparation()">
                     <div class="btn-progress-fill" id="btnProgressFill"></div>
-                    <div class="btn-progress-text" id="btnProgressText">🚀 马上开工（LAB+色差合并）</div>
+                    <div class="btn-progress-text" id="btnProgressText"> 马 上 开 工</div>
                 </div>
             </div>
         </div>
@@ -156,21 +156,21 @@
         </div>
         
         <div class="panel right-col">
-            <div class="section-title">🎬 本地生产历史记录</div>
+            <div class="section-title">🎬 历史记录</div>
             <div class="history-list" id="historyList">
                 <div style="text-align:center; color:var(--text-muted); font-size:11px; margin-top:10px;">暂无本地持久缓存</div>
             </div>
             
             <div class="right-action-box">
-                <button class="btn btn-sidebar btn-success" id="downloadBtn" disabled onclick="triggerDownload()">📥 下载当前无损网版包</button>
-                <button class="btn btn-sidebar btn-primary" id="downloadAllBtn" disabled onclick="triggerDownloadAll()">📦 下载全部持久文件</button>
-                <button class="btn btn-sidebar btn-danger" id="clearHistoryBtn" onclick="clearAllHistoryCache()">🗑️ 清空所有历史记录</button>
+                <button class="btn btn-sidebar btn-success" id="downloadBtn" disabled onclick="triggerDownload()">下载当前无损网版包</button>
+                <button class="btn btn-sidebar btn-primary" id="downloadAllBtn" disabled onclick="triggerDownloadAll()">下载全部持久文件</button>
+                <button class="btn btn-sidebar btn-danger" id="clearHistoryBtn" onclick="clearAllHistoryCache()">清空所有历史记录</button>
             </div>
         </div>
     </div>
 
     <div class="panel bottom-layout">
-        <div class="section-title">2. 工业输出网版通道</div>
+        <div class="section-title">输出通道</div>
         <div class="layer-horizontal-container" id="layerList">
             <div style="width:100%; text-align:center; color:var(--text-muted); font-size:12px; margin-top:35px;">暂无通道 data</div>
         </div>
@@ -253,14 +253,14 @@
             
             container.classList.add('loading');
             fill.style.width = '0%';
-            txt.innerText = "正在接收高速分色流...";
+            txt.innerText = "正在高速分色...";
             
             let progress = 0;
             const progTimer = setInterval(() => {
                 if (progress < 92) {
                     progress += 4;
                     fill.style.width = progress + '%';
-                    txt.innerText = `数据处理与矩阵合成中... ${progress}%`;
+                    txt.innerText = `请稍等...... ${progress}%`;
                 }
             }, 100);
 
@@ -314,7 +314,7 @@
             const txt = document.getElementById('btnProgressText');
             container.classList.remove('loading');
             fill.style.width = '0%';
-            txt.innerText = "🚀 马上开工（LAB+色差合并）";
+            txt.innerText = "马 上 开 工";
         }
 
         function renderAllLayersView(data) {
